@@ -1,16 +1,98 @@
 <!DOCTYPE HTML5>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JavaScript</title>
-  
-</head>
-<body style="background-color:lightblue; font-size: 20px; font-weight: bold;">
-    <h1>My Name is :</h1><script src="script.js"></script>
-    <h1>My Age is :</h1><script src="script2.js"></script>
-    <h1>I live in :</h1><script src="script3.js"></script>
-    <h1>I am in college:</h1><script src="script4.js"></script>
-</body>
+  </head>
+  <body style="background-color: lightblue; font-size: 20px; font-weight: bold">
+    <section
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      "
+    >
+      <label
+        >Enter Your Name
+        <input type="text" id="iname" />
+      </label>
+      <label
+        >Enter Your Age
+        <input type="text" id="iage" />
+      </label>
+      <label>
+        Where do you live?
+        <input type="text" id="ilocation" />
+      </label>
+      <div>
+        <label>
+          Do you go to college?
+          <input type="text" id="icollege" pattern="[Yy]es|[Nn]o" />
+        </label>
+      </div>
+      <div>
+        <button onclick="myFunction()">Who am I?</button>
+      </div>
+    </section>
+    <section>
+      <p id="name"></p>
+      <p id="age"></p>
+      <p id="City"></p>
+      <p id="Country"></p>
+      <p id="college"></p>
+    </section>
+    <script>
+      const name = document.getElementById('name');
+      const age = document.getElementById('age');
+      const Location = document.getElementById('City');
+      const college = document.getElementById('college');
+
+      window.onload = function () {
+        if (window.localStorage.getItem('name') != null) {
+          name.innerHTML =
+            'Your Name is: ' + window.localStorage.getItem('name');
+        }
+        if (window.localStorage.getItem('age') != null) {
+          age.innerHTML =
+            'You are: ' + window.localStorage.getItem('age') + 'years old';
+        }
+        if (window.localStorage.getItem('City') != null) {
+          Location.innerHTML =
+            'You live in: ' + window.localStorage.getItem('City');
+        }
+        if (window.localStorage.getItem('college') != null) {
+          if (window.localStorage.getItem('college') == 'yes') {
+            college.innerHTML = 'Yay you go to college!';
+          } else if (window.localStorage.getItem('college') == 'no') {
+            college.innerHTML = 'You dont go to college :(';
+          } else {
+            college.innerHTML = 'You dont know if you go to college';
+          }
+        }
+      };
+
+      function myFunction() {
+        const iname = document.getElementById('iname').value;
+        const iage = document.getElementById('iage').value;
+        const ilocation = document.getElementById('ilocation').value;
+        const icollege = document.getElementById('icollege').value;
+
+        name.innerHTML = `Your name is: ${iname}`; // ${iname} is the variable
+        age.innerHTML = `You are ${iage} years old`;
+        Location.innerHTML = `You live in: ${ilocation}`;
+        if (icollege == 'yes') {
+          college.innerHTML = 'Yay you go to college!';
+        } else {
+          college.innerHTML = 'You dont go to college :(';
+        }
+        window.localStorage.setItem('name', iname);
+        window.localStorage.setItem('age', iage);
+        window.localStorage.setItem('City', ilocation);
+        window.localStorage.setItem('college', icollege);
+      }
+    </script>
+  </body>
 </html>
